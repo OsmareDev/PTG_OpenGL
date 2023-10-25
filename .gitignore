@@ -34,3 +34,9 @@
 # Info
 *.pdf
 *.txt
+*.zip
+*.7z
+Textures/
+.vs/
+Debug/
+x64/
