@@ -1,4 +1,4 @@
-[Imgur](https://i.imgur.com/sJYtRbp.gifv)
+![Test1](https://github.com/OsmareDev/PTG_OpenGL/assets/50903643/178c6f9b-de8c-4a04-b87c-f195b8c4d3c8)
 
 ## English
 
