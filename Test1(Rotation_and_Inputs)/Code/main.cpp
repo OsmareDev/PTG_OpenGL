@@ -1,9 +1,7 @@
-// �scar Mar�n Egea
-
 #include <iostream>
 #include <GL/glut.h>
 
-// Prototipos de las funciones
+// Functions
 void drawBox();
 GLboolean initOpenGL();
 void display();
@@ -14,7 +12,7 @@ void mouseClick(GLint, GLint, GLint, GLint);
 void mouseMovement(GLint, GLint);
 void printFPS();
 
-// Variables globales (estados globales de la aplicaci�n)
+// Variables
 GLboolean fullscreen = false;
 GLboolean mouseDown = false;
 GLboolean animation = true;
@@ -24,8 +22,8 @@ GLfloat yrot = 0.0f;
 GLfloat xdiff = 0.0f;
 GLfloat ydiff = 0.0f;
 
-GLint g_Width = 500;			// Ancho inicial de la ventana
-GLint g_Height = 500;			// Altura incial de la ventana
+GLint g_Width = 500;
+GLint g_Height = 500;
 
 
 GLint main(GLint argc, char **argv)
@@ -143,8 +141,8 @@ void inactive()
 {
 	if (!mouseDown && animation)
 	{
-		xrot += 0.050f; // 0.3f
-		yrot += 0.065f; // 0.4f
+		xrot += 0.050f;
+		yrot += 0.065f;
 	}
  
 	glutPostRedisplay();
@@ -193,7 +191,7 @@ void mouseMovement(GLint x, GLint y)
 
 void printFPS()
 {
-	static GLint frameCount = 0;			//  N�mero de frames
+	static GLint frameCount = 0;
 	static GLfloat fps = 0;
 	static GLint currentTime = 0, previousTime = 0;
 

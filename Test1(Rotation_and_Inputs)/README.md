@@ -1,59 +1,19 @@
-This code sets up a basic OpenGL window and displays a rotating 3D box. It handles user input for quitting the application and toggling animation. The box's rotation can also be controlled by mouse input. The FPS is displayed in the console.
+[Imgur](https://i.imgur.com/sJYtRbp.gifv)
 
-![Imgur Gif](https://i.imgur.com/sJYtRbp.gifv)
+## English
 
-1. **Include Statements:**
-   - `#include <iostream>`: Standard C++ library for input and output.
-   - `#include <GL/glut.h>`: GLUT library for setting up an OpenGL window.
+This code setups a basic openGL window and displays a rotating 3D cube
 
-2. **Function Prototypes:**
-   - `void drawBox()`: Function prototype for drawing the 3D box.
-   - `GLboolean initOpenGL()`: Function prototype for initializing OpenGL settings.
-   - `void display()`: Function prototype for the display callback.
-   - `void resize(GLint, GLint)`: Function prototype for window resize callback.
-   - `void inactive()`: Function prototype for idle (inactivity) callback.
-   - `void keyboard(GLubyte, GLint, GLint)`: Function prototype for keyboard callback.
-   - `void mouseClick(GLint, GLint, GLint, GLint)`: Function prototype for mouse click callback.
-   - `void mouseMovement(GLint, GLint)`: Function prototype for mouse movement callback.
-   - `void printFPS()`: Function prototype for printing frames per second.
+Immediate mode (legacy) is used to draw the cube (**In immediate mode, the rendering commands are immediately sent to the graphics card hardware, which means that the visual results are processed and displayed straight away. The Immediate mode is usually less efficient in terms of performance although easier to use, especially for complex graphical applications.**)
 
-3. **Global Variables:**
-   - `fullscreen`, `mouseDown`, `animation`: Boolean flags to control application state.
-   - `xrot`, `yrot`, `xdiff`, `ydiff`: Variables to control rotation and mouse interaction.
-   - `g_Width`, `g_Height`: Initial window dimensions.
+To rotate the cube, the mouse input is collected, clicking and dragging rotates the cube.
 
-4. **Main Function (`main`):**
-   - Initializes GLUT and creates a window.
-   - Sets up various callback functions.
-   - Calls the `initOpenGL()` function to initialize OpenGL settings.
-   - Starts the main loop.
+---
 
-5. **`drawBox` Function:**
-   - Draws a colored 3D box using OpenGL's immediate mode (legacy).
-   - Defines vertices for each face of the box and sets colors.
+## Español
 
-6. **`initOpenGL` Function:**
-   - Initializes OpenGL settings, including the clear color and depth test.
+Este código prepara una ventana básica de openGL y muestra un cubo 3D en rotacion
 
-7. **`display` Function:**
-   - Clears the screen and sets up the view and projection matrices.
-   - Rotates the box based on the `xrot` and `yrot` variables.
-   - Calls `drawBox` to render the 3D box.
-   - Prints frames per second using `printFPS`.
+Para el dibujado del cubo se usa el modo inmediato (legacy) (**En el modo inmediato, los comandos de renderizado se envían inmediatamente al hardware de la tarjeta gráfica, lo que significa que los resultados visuales son procesados y mostrados al instante. El modo inmediato suele ser menos eficiente en términos de rendimiento aunque mas sencillo de usar, especialmente para aplicaciones gráficas complejas.**)
 
-8. **`resize` Function:**
-   - Handles window resizing by updating the viewport and projection matrix.
-
-9. **`inactive` Function:**
-   - Controls the animation of the box when the mouse is not interacting.
-   - Rotates the box slightly if the `animation` flag is set.
-
-10. **`keyboard` Function:**
-    - Handles keyboard input, including quitting the application with the 'q' key and toggling animation with 'a'.
-
-11. **Mouse Interaction Functions (`mouseClick` and `mouseMovement`):**
-    - `mouseClick` is called when a mouse button is clicked and tracks mouse down state.
-    - `mouseMovement` is called when the mouse is moved and updates rotation based on mouse movement.
-
-12. **`printFPS` Function:**
-    - Calculates and prints frames per second (FPS) in the console.
+Para la rotación del cubo se recoge el input del raton, haciendo click y arrastrando se rota dicho cubo.
