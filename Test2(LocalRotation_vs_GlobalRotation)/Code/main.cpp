@@ -1,8 +1,7 @@
-// Óscar Marín Egea
-
 #include <iostream>
 #include <GL/glut.h>
 
+// Functions
 void drawBox();
 void drawScene();
 GLboolean init();
@@ -15,7 +14,7 @@ void mouse(GLint, GLint, GLint, GLint);
 void mouseMotion(GLint, GLint);
 void printFPS();
 
-// Variables globales (estados globales de la aplicación)
+// Variables
 GLboolean fullscreen = false;
 GLboolean mouseDown = false;
 GLboolean animation = true;
@@ -40,8 +39,8 @@ GLfloat moonEarthW = (1.0f / 28.0f) * Kw;
 GLfloat satelEarthW = 2.0f * Kw;
 GLfloat geoStatW = 1.0f * Kw;
 
-GLint g_Width = 500;                          // Ancho inicial de la ventana
-GLint g_Height = 500;                         // Altura incial de la ventana
+GLint g_Width = 500;
+GLint g_Height = 500;
 
 
 GLint main(GLint argc, char** argv)
@@ -50,7 +49,7 @@ GLint main(GLint argc, char** argv)
 	glutInitWindowPosition(50, 50);
 	glutInitWindowSize(g_Width, g_Height);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-	glutCreateWindow("Ejercicios tema 1 - parte 1");
+	glutCreateWindow("Test 2");
 	init();
 
 	glutDisplayFunc(display);
@@ -115,12 +114,12 @@ void drawScene() {
 
 	glPushMatrix();
 
-	// escalamos los cubos
+	// cube scaling 
 	glScalef(0.4f, 0.4f, 0.4f);
-	// el sol
+	// sun
 	drawBox();
 
-	// tierra
+	// earth
 	glRotatef(earthSunRot, 0.0f, 1.0f, 0.0f);
 	glTranslatef(2.0f, 0.0f, 0.0f);
 
@@ -129,16 +128,15 @@ void drawScene() {
 	glScalef(0.5f, 0.5f, 0.5f);
 	drawBox();
 
-	//geostacionario
+	// geostationary
 	glPushMatrix();
-	//glRotatef(10.0f, 1.0f, 0.0f, 1.0f);
 	glTranslatef(0.0f, 0.0f, 1.2f);
 	glScalef(0.2f, 0.2f, 0.2f);
 	drawBox();
 	glPopMatrix();
 	glPopMatrix();
 
-	// luna
+	// moon
 	glPushMatrix();
 	glRotatef(moonEarthRot, 0.0f, 1.0f, 0.0f);
 	glTranslatef(0.9f, 0.0f, 0.0f);
@@ -146,7 +144,7 @@ void drawScene() {
 	drawBox();
 	glPopMatrix();
 
-	// satelite vertical
+	// vertical satellite
 	glPushMatrix();
 	glRotatef(satelEarthRot, 1.0f, 0.0f, 0.0f);
 	glTranslatef(0.0f, 0.8f, 0.0f);
@@ -179,11 +177,10 @@ void display()
 		0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f);
 
-	// rotacion del raton
+	// mouse rotation
 	glRotatef(xrot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yrot, 0.0f, 1.0f, 0.0f);
 
-	// escena a dibujar
 	drawScene();
 
 	glutSwapBuffers();
@@ -319,7 +316,7 @@ void mouseMotion(GLint x, GLint y)
 
 void printFPS()
 {
-	static GLint frameCount = 0;			//  Número de frames
+	static GLint frameCount = 0;
 	static GLfloat fps = 0;
 	static GLint currentTime = 0, previousTime = 0;
 
