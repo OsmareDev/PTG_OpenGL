@@ -31,8 +31,8 @@ GLfloat yrot = 0.0f;
 GLfloat xdiff = 0.0f;
 GLfloat ydiff = 0.0f;
 
-GLint g_Width = 500;                          // Ancho inicial de la ventana
-GLint g_Height = 500;                         // Altura incial de la ventana
+GLint g_Width = 500;
+GLint g_Height = 500;
 
 GLboolean textureOn = false;
 GLuint opcion = 0;
@@ -53,11 +53,11 @@ GLuint vaoHandle[3];
 //  |/      |/
 //  v2------v3
 
-// Coordenadas del vertex array  =====================================
-// Un cubo tiene 6 lados y cada lado tiene 2 triangles, por tanto, un cubo
-// tiene 36 vértices (6 lados * 2 trian * 3 vertices = 36 vertices). Y cada
-// vertice tiene 3 components (x,y,z) de reales, por tanto, el tamaño del vertex
-// array es 108 floats (36 * 3 = 108).
+// Vertex array coordinates ==================================================
+// A cube has 6 sides and each side has 2 triangles, therefore, a cube
+// has 36 vertices (6 sides * 2 trian * 3 vertices = 36 vertices). And every
+// vertex has 3 real components (x,y,z), therefore, the size of the vertex
+// array is 108 floats (36 * 3 = 108).
 const GLfloat vertices1[] = { 1, 1, 1,  -1, 1, 1,  -1,-1, 1,      // v0-v1-v2 (front)
 					   -1,-1, 1,   1,-1, 1,   1, 1, 1,      // v2-v3-v0
 
@@ -113,7 +113,7 @@ const GLfloat texcoord1[] = { 1, 1,   0, 1,  0, 0,      // v0-v1-v2 (front)
 						0, 1,   1, 1,   1, 0 };    // v6-v5-v4
 
 
-// Coordenadas del vertex array eliminando los vértices repetidos (más compacto)
+// Coordinates of the vertex array eliminating repeated vertices (more compact)
 const GLfloat vertices2[]= { 1, 1, 1,  -1, 1, 1,  -1,-1, 1,   1,-1, 1,   // v0,v1,v2,v3 (front)
 						1,-1,-1,   1, 1,-1,  -1, 1,-1,  -1,-1,-1};	// v4,v5,v6,v7 (back)
 
@@ -133,9 +133,9 @@ const GLubyte indices[] = { 0, 1, 2,   2, 3, 0,      // front
 					   7, 4, 3,   3, 2, 7,      // bottom
 					   4, 7, 6,   6, 5, 4 };    // back
 
-// Vertex array entrelazado
-// Los dos atributos (posición y color) se emaquetan juntos. EL resultado es 
-// algo similar a un conjunto de estructuras: ((V,C,T), (V,C,T), (V,C,T),...).
+// Vertex interleaved array
+// The two attributes (position and color) are packaged together. The result is
+// something similar to a set of structures: ((V,C,T), (V,C,T), (V,C,T),...).
 const GLfloat vertices3[]= {	 1, 1, 1,  1, 1, 1,	 1, 1,	// v0
 						-1, 1, 1,  1, 1, 0,	 0, 1,	// v1
 						-1,-1, 1,  1, 0, 0,	 0, 0,	// v2
@@ -177,8 +177,8 @@ int main(int argc, char *argv[])
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// dibuja 1 cubo: modo inmediato
-// 108 llamadas = 36 glVertex*() + 36 glColor*() + 36 glTexCoord*() 
+// draw 1 cube: immediate mode
+// 108 calls = 36 glVertex*() + 36 glColor*() + 36 glTexCoord*()
 ///////////////////////////////////////////////////////////////////////////////
 void draw1Cube()
 {
@@ -489,11 +489,11 @@ void cubeVAO3() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-// Dibuja múltiples cubos
+// Draw multiple cubes
 ////////////////////////////////////////////////////////////////////////////////////
 void drawMultipleCubes()
 {
-	const GLint N = 40; // Número de cubos en cada eje
+	const GLint N = 40; // Nï¿½mero de cubos en cada eje
 	const GLfloat RangoIni = -1.0f;
 	const GLfloat RangoFin =  1.0f;
 	GLfloat x, y, z;
@@ -694,7 +694,7 @@ GLboolean init()
 	glClearDepth(1.0f);
 
 	
-	// Carga e inicializa la textura
+	// Load and initialize the texture
 	std::vector<GLubyte> img_data;
 	GLuint img_width, img_height;
 	const char* img_filename = "../Textures/wood_box.png";
@@ -709,12 +709,12 @@ GLboolean init()
 		glBindTexture(GL_TEXTURE_2D, textures);
 
 		gluBuild2DMipmaps(GL_TEXTURE_2D,			// texture to specify
-			GL_RGBA,				// internal texture storage format
-			img_width,			// texture width
-			img_height,			// texture height
-			GL_RGBA,				// pixel format
-			GL_UNSIGNED_BYTE,	// color component format
-			&img_data[0]);		// pointer to texture image
+			GL_RGBA,								// internal texture storage format
+			img_width,								// texture width
+			img_height,								// texture height
+			GL_RGBA,								// pixel format
+			GL_UNSIGNED_BYTE,						// color component format
+			&img_data[0]);							// pointer to texture image
 
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -858,7 +858,7 @@ void mouseMotion(int x, int y)
 
 void printFPS()
 {
-	static int frameCount = 0;			//  Número de frames
+	static int frameCount = 0;
 	static float fps = 0;
 	static int currentTime = 0, previousTime = 0;
 

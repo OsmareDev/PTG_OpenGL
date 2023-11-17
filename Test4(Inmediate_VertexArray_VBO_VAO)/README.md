@@ -1,34 +1,39 @@
-This is a C++ program for a basic OpenGL application to draw cubes using various rendering methods (immediate mode, vertex arrays, vertex buffer objects, and vertex array objects). The program sets up an OpenGL window, initializes various rendering options, and draw a grid of cubes with different rendering techniques.
 
-![Imgur Gif](https://i.imgur.com/QL5tyAq.gifv)
 
-### Cube Drawing Program
+## English
 
-This C++ program uses OpenGL and GLUT to create a 3D graphics application for drawing cubes. It provides different rendering options for drawing cubes with various rendering techniques. Here's a breakdown of the code:
+The code generates a large number of cubes and checks the performance difference between:
 
-#### Main Function (`main`)
+### Immediate mode (**Rendering commands are sent immediately to the graphics card hardware. Being simpler to use but losing performance.**)
 
-- Initializes the GLUT library and sets up the window.
-- Initializes GLEW for OpenGL extension handling.
-- Calls the `init` function for program initialization.
-- Sets up callback functions for rendering, keyboard input, mouse events, window resizing, and idle processing.
-- Starts the main loop (`glutMainLoop`) for running the program.
+### Using VA (**Instead of sending vertices one by one, vertex arrays allow you to send a block of vertex data at once, which can significantly improve performance compared to immediate mode**)
 
-#### Cube Drawing Functions (`draw1Cube`, `drawMultipleCubes`)
+* **Overhead Reduction:** In immediate mode, sending vertices one by one can generate significant overhead due to repeated calls to OpenGL functions. With vertex arrays, you can send a block of vertex data at once, reducing the overhead associated with multiple function calls.
+* **Less Bandwidth Usage:** By sending vertex data in a single block, the amount of data sent between the CPU and GPU is minimized, which can be beneficial for performance.
 
-- `draw1Cube`: This function uses immediate mode rendering to draw a single cube. It specifies the vertices, colors, and texture coordinates for each face of the cube using OpenGL commands.
-- `drawMultipleCubes`: This function draws multiple cubes in a grid pattern using the specified rendering technique (either immediate mode or vertex array, vertex buffer object, or vertex array object).
+### Using VBO (**Vertex data is stored directly in GPU memory, reducing the need for frequent transfers between the CPU and GPU.**)
 
-#### Initialization Functions (`init`, `initVBO`, `initVAO`)
+* **GPU Storage:** VBOs allow vertex data to be stored directly in GPU memory. This means that data does not have to be transferred
+* **Overhead Reduction:** By reducing the amount of data transferred between the CPU and GPU, the overhead associated with data transfer is minimized, which can significantly improve performance.
 
-- `init`: Initializes various OpenGL settings, sets up the window, and loads a texture.
-- `initVBO`: Initializes Vertex Buffer Objects (VBOs) for rendering with vertex arrays.
-- `initVAO`: Initializes Vertex Array Objects (VAOs) for rendering with vertex arrays.
+### Using VAO (**Structure that encapsulates the state of several Vertex Buffer Objects (VBOs) and vertex attribute specifications, allowing to simplify and organize the configuration of the graphics pipeline for efficient rendering of 3D objects**)
 
-#### Rendering State Functions (`stateVA1`, `stateVA2`, `stateVA3`, `stateVBO1`, `stateVBO2`, `stateVBO3`, `stateVAO1`, `stateVAO2`, `stateVAO3`)
+---
 
-These functions set up OpenGL rendering states for different rendering techniques, including immediate mode, vertex arrays, VBOs, and VAOs.
+## Español
 
-#### Constants and Global Variables
+En el código se genera un número alto de cubos y se comprueba la diferencia de rendimiento entre:
 
-- Various constants and global variables are declared to control the program's behavior, such as window size, texture loading, and rendering options.
+### Modo inmediato (**Los comandos de renderizado se envían inmediatamente al hardware de la tarjeta gráfica. Siendo más simple de usar pero perdiendo rendimiento.**)
+
+### Usando VA (**En lugar de enviar vértices uno por uno, los vertex arrays permiten enviar un bloque de datos de vértices de una sola vez, lo que puede mejorar significativamente el rendimiento en comparación con el modo inmediato**)
+
+* **Reducción de Overhead:** En el modo inmediato, enviar vértices uno por uno puede generar un overhead significativo debido a la repetición de llamadas a funciones de OpenGL. Con vertex arrays, puedes enviar un bloque de datos de vértices de una sola vez, reduciendo el overhead asociado con múltiples llamadas de función.
+* **Menos Uso de Ancho de Banda:** Al enviar datos de vértices en un solo bloque, se minimiza la cantidad de datos enviados entre la CPU y la GPU, lo que puede ser beneficioso para el rendimiento.
+
+### Usando VBO (**Los datos de vértices se almacenan directamente en la memoria de la GPU, reduciendo la necesidad de transferencias frecuentes entre la CPU y la GPU.**)
+
+* **Almacenamiento en la GPU:** Los VBOs permiten almacenar datos de vértices directamente en la memoria de la GPU. Esto significa que los datos no tienen que transferirse
+* **Reducción de Overhead:** Al reducir la cantidad de datos transferidos entre la CPU y la GPU, se minimiza el overhead asociado con la transferencia de datos, lo que puede mejorar significativamente el rendimiento.
+
+### Usando VAO (**Estructura que encapsula el estado de varios Vertex Buffer Objects (VBOs) y especificaciones de atributos de vértices, permitiendo simplificar y organizar la configuración del pipeline gráfico para la renderización eficiente de objetos 3D**)
