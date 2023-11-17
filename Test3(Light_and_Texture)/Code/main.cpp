@@ -1,12 +1,9 @@
-// Nombre: Oscar Marin Egea
-
 #include <GL/glut.h>
 #include <vector>
 #include "lodepng.h"
 #include <iostream>
 
-// Prototipos de las funciones
-
+// Functions
 GLboolean init();
 void display();
 void resize(GLint, GLint);
@@ -16,8 +13,7 @@ void specialKeyboard(GLint, GLint, GLint);
 void mouse(GLint, GLint, GLint, GLint);
 void mouseMotion(GLint, GLint);
 
-// Variables globales con los estados globales de la aplicación
-
+// Variables
 GLboolean fullscreen = false;
 GLboolean mouseDown = false;
 GLboolean animation = false;
@@ -27,8 +23,8 @@ GLfloat yrot = 0.0f;
 GLfloat xdiff = 0.0f;
 GLfloat ydiff = 0.0f;
 
-GLint g_Width = 500;                          // Ancho inicial de la ventana
-GLint g_Height = 500;                         // Altura incial de la ventana
+GLint g_Width = 500;
+GLint g_Height = 500;
 
 
 GLuint textures;
@@ -39,7 +35,7 @@ GLint main(GLint argc, char **argv)
 	glutInitWindowPosition(50, 50);
 	glutInitWindowSize(g_Width, g_Height);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutCreateWindow("Programa Ejemplo");
+	glutCreateWindow("Test 3");
 	init();
 
 	glutDisplayFunc(display);
@@ -84,8 +80,8 @@ GLboolean init()
 	const GLfloat luzLocal[] = { 0.5f, 0.5f, 1.0f, 1.0f };
 	const GLfloat luzDireccional[] = { 0.5f, 0.5f, 1.0f, 0.0f };
 	const GLfloat direccionFoco[] = { -0.5f, -0.5f, -3.0f };
-	const GLfloat amplitudFoco = 10.0f;							// En grados
-	const GLfloat intensidadLuz[] = { 1.0f, 1.0f, 1.0f, 1.0f }; // Color de la parte ambiente, difusa y especular de la luz.
+	const GLfloat amplitudFoco = 10.0f;							// Degrees
+	const GLfloat intensidadLuz[] = { 1.0f, 1.0f, 1.0f, 1.0f }; // Color of the ambient, diffuse and specular part of the light.
 
 	glClearColor(0.93f, 0.93f, 0.93f, 0.0f);
  
@@ -93,25 +89,24 @@ GLboolean init()
 	glDepthFunc(GL_LESS);
 	glClearDepth(1.0f);
 	
-	// Tarea por hacer: Activar la iluminación.
+	// Activate the lighting.
 	glEnable(GL_LIGHTING);
 	
-	// Tarea por hacer: definir 3 luces.
-	// 1º luz: puntual
+	// light: punctual
 	glLightfv(GL_LIGHT0, GL_POSITION, luzLocal);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, intensidadLuz);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, intensidadLuz);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, intensidadLuz);
 	glEnable(GL_LIGHT0);
 
-	// 2º luz: direccional
+	// light: directional
 	glLightfv(GL_LIGHT1, GL_POSITION, luzDireccional);
 	glLightfv(GL_LIGHT1, GL_AMBIENT, intensidadLuz);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, intensidadLuz);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, intensidadLuz);
 	//glEnable(GL_LIGHT1);
 
-	// 3º luz: foco
+	// light: focal
 	glLightfv(GL_LIGHT2, GL_POSITION, luzLocal);
 	glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, direccionFoco);
 	glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, amplitudFoco);
@@ -120,21 +115,17 @@ GLboolean init()
 	glLightfv(GL_LIGHT2, GL_SPECULAR, intensidadLuz);
 	//glEnable(GL_LIGHT2);
 
-	// Tarea por hacer: Crear el obj. textura, cargar la imagen png, activar la textura, 
-	// cargar los datos en el objeto textura y definir filtros, modo repetición y modo pegado
-
-	
+	// Create object and activate texture
 	std::vector<GLubyte> img_data;
 	GLuint img_width, img_height;
 
 	const char* img_filename = "../Textures/Copper Rough_diffuse.png";
 
-	std::cout << "Cargando la textura " << img_filename << std::endl;
+	std::cout << "Loading texture " << img_filename << std::endl;
 	GLuint error = lodepng::decode(img_data, img_width, img_height, img_filename);
 
 	if ( !error )
 	{
-		//...
 		glEnable(GL_TEXTURE_2D);
 		glGenTextures(1, &textures);
 		glBindTexture(GL_TEXTURE_2D, textures);
@@ -148,7 +139,6 @@ GLboolean init()
 				GL_UNSIGNED_BYTE,	// color component format
 				&img_data[0]);		// pointer to texture image
 	   
-		//modo de pegado
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
@@ -157,12 +147,10 @@ GLboolean init()
 
 		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
-		std::cout << "tamanyo de la textura (w,h) = (" << img_width << "," << img_height << ")" << std::endl;
-		
-		//...
+		std::cout << "texture size (w,h) = (" << img_width << "," << img_height << ")" << std::endl;
 	}
 	else
-	   std::cout << "Error al cargar la textura" << img_filename << std::endl;
+	   std::cout << "error loading the texture" << img_filename << std::endl;
 	
 	return true;
 }
@@ -189,9 +177,9 @@ void display()
 	glRotatef(xrot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yrot, 0.0f, 1.0f, 0.0f);
 
-	glColor4fv(bronzeColorDiff); // Color predefinidos de los objetos
+	glColor4fv(bronzeColorDiff);
 	
-	// Tarea por hacer: Activar el material antes de dibujar los objetos de la escena.
+	// Activate the material before drawing the objects in the scene.
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, bronzeColorAmb);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, bronzeColorDiff);
@@ -242,7 +230,7 @@ void idle()
  
 void keyboard(GLubyte key, GLint x, GLint y)
 {
-	static GLint tipoLuz = 0; // 0 - local, 1 - Direccional, 2- Foco
+	static GLint tipoLuz = 0; // 0 - Point, 1 - Directional, 2- Focal
 	const GLint NUM_TIPOS_LUZ = 3;
 	static GLint modoPegadoTextura = 0; // 0 - GL_REPLACE, 1 - GL_MODULATE
 	const GLint NUM_TIPOS_PEGADO = 2;

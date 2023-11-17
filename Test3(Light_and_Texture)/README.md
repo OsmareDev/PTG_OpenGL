@@ -1,42 +1,19 @@
-This C++ code represents an OpenGL application that creates a window, renders 3D objects, and handles various user interactions. The program includes features like lighting, texturing, and various settings that can be toggled through keyboard input. It also supports resizing, window management, and full-screen mode.
 
-![Imgur Gif](https://i.imgur.com/GfrZuLb.gifv)
 
-1. **Include Statements:**
-   - `#include <GL/glut.h>`: Includes the GLUT library for creating and managing the OpenGL window.
-   - `#include <vector>`: Includes the C++ vector container for holding image data.
-   - `"lodepng.h"`: Custom library for image loading.
-   - `<iostream>`: Includes the C++ standard library for input and output.
+## English
 
-2. **Function Prototypes:**
-   - Prototypes for functions used in the application, such as initialization, rendering, resizing, and various user interactions.
+This code prepares a basic openGL window and displays a simple scene.
 
-3. **Global Variables:**
-   - Several global boolean and floating-point variables control the application state. These include settings for fullscreen mode, mouse interaction, and animation. Other variables manage rotations, window dimensions, textures, and lighting.
+In this scene you can toggle between linear lighting (**Illumination is calculated at the vertices of 3D objects and smoothly interpolated along the faces. Giving a smoother result**) and flat lighting (**Illumination is calculated the same for each pixel within a face**).
 
-4. **`main` Function:**
-   - The `main` function initializes GLUT, sets the window's initial position and size, defines display and interaction callback functions, and enters the main loop.
+The 3 types of lights are used: spot, directional and focus. Finally, the different filters and texture extension modes are used.
 
-5. **`drawPlane` Function:**
-   - This function creates a grid-like plane with texture coordinates. It generates rows and columns of vertices, setting up the plane to be used for texturing.
+---
 
-6. **`init` Function:**
-   - The `init` function initializes various aspects of the application, including the clear color, depth testing, lighting, texture loading, and texture filtering.
+## Español
 
-7. **`display` Function:**
-   - The `display` function is responsible for rendering the 3D scene. It sets up the view and projection matrices, applies rotations, and draws objects. Lighting and material properties are also set up.
+Este código prepara una ventana básica de openGL y muestra una escena simple. 
 
-8. **`resize` Function:**
-   - The `resize` function handles window resizing by updating the viewport and projection matrix based on the window dimensions.
+En esta escena se puede alternar entre la iluminación lineal (**La iluminación se calcula en los vértices de los objetos 3D y se interpola suavemente a lo largo de las caras. Dando un resultado más suave**) y la iluminación plana (**La iluminación se calcula igual para cada uno de los píxeles dentro de una cara**).
 
-9. **`idle` Function:**
-   - The `idle` function rotates the scene when the mouse is not interacting, controlled by the `animation` variable.
-
-10. **`keyboard` Function:**
-    - The `keyboard` function responds to keyboard input for various features. It allows the user to toggle animation, lighting, smooth shading, texturing, texture modes, filters, and other settings.
-
-11. **`specialKeyboard` Function:**
-    - The `specialKeyboard` function handles special keys, including the F1 key, which toggles full-screen mode.
-
-12. **Mouse Interaction Functions (`mouse` and `mouseMotion`):**
-    - The `mouse` function tracks mouse button clicks and updates the mouse down state. The `mouseMotion` function handles mouse movement and updates the rotation based on mouse input.
+Se hace uso de los 3 tipos de luces: puntual, direccional y foco. Por último se usan los distintos filtros y modos de extensión de las texturas.
