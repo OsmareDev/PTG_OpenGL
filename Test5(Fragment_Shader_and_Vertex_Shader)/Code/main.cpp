@@ -358,7 +358,7 @@ int main(int argc, char *argv[])
 	glutInitWindowPosition(50, 50);
 	glutInitWindowSize(g_Width, g_Height);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutCreateWindow("Programa Ejemplo");
+	glutCreateWindow("Test 5");
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
 	{
