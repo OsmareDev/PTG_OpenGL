@@ -1,5 +1,3 @@
-// Oscar Marin Egea
-
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include <iostream>
@@ -43,8 +41,8 @@ GLfloat yrot = 0.0f;
 GLfloat xdiff = 0.0f;
 GLfloat ydiff = 0.0f;
 
-GLint g_Width = 500;                          // Ancho inicial de la ventana
-GLint g_Height = 500;                         // Altura incial de la ventana
+GLint g_Width = 500;
+GLint g_Height = 500;
 
 GLuint vaoCube;
 GLuint vaoTea;
@@ -62,7 +60,7 @@ GLfloat cantRotCol = 0.0f;
 GLfloat umbral = 0.0f;
 
 
-GLint numVertTeapot; // número de vértices de la tetera
+GLint numVertTeapot;
 
 
 // cubo ///////////////////////////////////////////////////////////////////////
@@ -74,11 +72,11 @@ GLint numVertTeapot; // número de vértices de la tetera
 //  |/      |/
 //  v2------v3
 
-// Coordenadas del vertex array  =====================================
-// Un cubo tiene 6 lados y cada lado tiene 2 triangles, por tanto, un cubo
-// tiene 36 vértices (6 lados * 2 trian * 3 vertices = 36 vertices). Y cada
-// vertice tiene 4 components (x,y,z) de reales, por tanto, el tamaño del vertex
-// array es 144 floats (36 * 4 = 144).
+// Vertex array coordinates ==================================================
+// A cube has 6 sides and each side has 2 triangles, therefore, a cube
+// has 36 vertices (6 sides * 2 trian * 3 vertices = 36 vertices). And every
+// vertex has 4 real components (x,y,z), therefore, the size of the vertex
+// array is 144 floats (36 * 4 = 144).
 GLfloat vertices1[] = { 1, 1, 1, 1,  -1, 1, 1, 1,  -1,-1, 1, 1,     // v0-v1-v2 (front)
 					   -1,-1, 1, 1,   1,-1, 1, 1,   1, 1, 1, 1,     // v2-v3-v0
 
@@ -117,7 +115,7 @@ GLfloat colores1[]   = {1, 1, 1, 1,   1, 1, 0, 1,   1, 0, 0, 1,      // v0-v1-v2
 
 
 
-// BEGIN: Soporte shaders //////////////////////////////////////////////////////////////////////////////////////////
+// BEGIN: Shader support //////////////////////////////////////////////////////////////////////////////////////////
 
 void loadSource(GLuint &shaderID, std::string name) 
 {
@@ -213,13 +211,13 @@ GLint status;
 	return;
 }
 
-// END:   Soporte shaders //////////////////////////////////////////////////////////////////////////////////////////
+// END:   Shader support //////////////////////////////////////////////////////////////////////////////////////////
 
 
-// BEGIN: Inicializa primitivas de dibujo //////////////////////////////////////////////////////////////////////////
+// BEGIN: Initializes drawing primitives //////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-// Init para Cube
+// Init for Cube
 ///////////////////////////////////////////////////////////////////////////////
 void initCube()
 {
@@ -228,8 +226,8 @@ void initCube()
 	glGenVertexArrays(1, &vaoCube);
 	glBindVertexArray(vaoCube);
 
-	//glEnableClientState(GL_VERTEX_ARRAY);	// Tarea por hacer (ejer. 1.2): sustituir por glEnableVertexAttribArray
-	//glEnableClientState(GL_COLOR_ARRAY);	// Idem.
+	//glEnableClientState(GL_VERTEX_ARRAY);
+	//glEnableClientState(GL_COLOR_ARRAY);
 
 	glGenBuffers(1, &vboHandle);
 	glBindBuffer(GL_ARRAY_BUFFER, vboHandle);
@@ -237,8 +235,8 @@ void initCube()
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices1), vertices1);
 	glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices1), sizeof(colores1), colores1);
 
-	//glVertexPointer(4, GL_FLOAT, 0, (GLubyte *)NULL + 0);	// Tarea por hacer (ejer. 1.2): sustituir por glVertexAttribPointer
-	//glColorPointer(4, GL_FLOAT, 0, (GLubyte *)NULL + sizeof(GL_FLOAT) * 4 * 36); // Idem.
+	//glVertexPointer(4, GL_FLOAT, 0, (GLubyte *)NULL + 0);
+	//glColorPointer(4, GL_FLOAT, 0, (GLubyte *)NULL + sizeof(GL_FLOAT) * 4 * 36);
 	GLuint loc = glGetAttribLocation(programID, "aPosition");
 	GLuint loc2 = glGetAttribLocation(programID, "aColor");
 
@@ -254,11 +252,11 @@ void initCube()
 
 ///////////////////////////////////////////////////////////////////////////////
 // Init Teapot
-// parametros: 
-//		grid - número de rejillas
-//		transform - matriz de tranformación del modelo
+// parameters:
+// 		grid - number of grids
+// 		transform - model transformation matrix
 // return:
-//		número de vertices del modelo
+// 		number of vertices in the model
 ///////////////////////////////////////////////////////////////////////////////
 GLint initTeapot(GLint grid, glm::mat4 transform)
 {
@@ -274,7 +272,7 @@ GLint initTeapot(GLint grid, glm::mat4 transform)
 	generatePatches(v, n, tc, el, grid);
 	moveLid(grid, v, transform);
 
-	// Tarea por hacer (ejer. 1.4): Crear y activar VAO
+	// Creating and activating VAO
 	glGenVertexArrays(1, &vaoTea);
 	glBindVertexArray(vaoTea);
 
@@ -282,8 +280,8 @@ GLint initTeapot(GLint grid, glm::mat4 transform)
 	glGenBuffers(4, handle);
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[0]);
-	glBufferData(GL_ARRAY_BUFFER, (3 * verts) * sizeof(GLfloat), v, GL_STATIC_DRAW); // Datos de la posición de los vértices
-	// Tarea por hacer (ejer. 1.4): Establecer el puntero al atributo del vertex shader y activar el array
+	glBufferData(GL_ARRAY_BUFFER, (3 * verts) * sizeof(GLfloat), v, GL_STATIC_DRAW); // Vertex position data
+	// Setting the pointer to the vertex shader attribute and activate the array
 	GLuint locTea1 = glGetAttribLocation(programID2, "aPosition");
 	glEnableVertexAttribArray(locTea1);
 	glVertexAttribPointer(locTea1, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -291,8 +289,8 @@ GLint initTeapot(GLint grid, glm::mat4 transform)
 	
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[1]);
-	glBufferData(GL_ARRAY_BUFFER, (3 * verts) * sizeof(GLfloat), n, GL_STATIC_DRAW); // Datos de las normales de los vértices
-	// Tarea por hacer (ejer. 1.4): Establecer el puntero al atributo del vertex shader y activar el array
+	glBufferData(GL_ARRAY_BUFFER, (3 * verts) * sizeof(GLfloat), n, GL_STATIC_DRAW); // Vertex normal data
+	// Setting the pointer to the vertex shader attribute and activating the array
 	GLuint locTea2 = glGetAttribLocation(programID2, "aNormal");
 	glEnableVertexAttribArray(locTea2);
 	glVertexAttribPointer(locTea2, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -300,16 +298,16 @@ GLint initTeapot(GLint grid, glm::mat4 transform)
 
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[2]);
-	glBufferData(GL_ARRAY_BUFFER, (2 * verts) * sizeof(GLfloat), tc, GL_STATIC_DRAW); // Datos de las coordenadas de textura
-	// Tarea por hacer (ejer. 1.4): Establecer el puntero al atributo del vertex shader y activar el array
+	glBufferData(GL_ARRAY_BUFFER, (2 * verts) * sizeof(GLfloat), tc, GL_STATIC_DRAW); // Texture coordinate data
+	// Set the pointer to the vertex shader attribute and activate the array
 	GLuint locTea3 = glGetAttribLocation(programID2, "aTexCoord");
 	glEnableVertexAttribArray(locTea3);
 	glVertexAttribPointer(locTea3, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	//glVertexAttribPointer(loc3, 2, GL_FLOAT, GL_FALSE, 0, (char*)NULL + ((3 * verts) * sizeof(GLfloat)) + ((3 * verts) * sizeof(GLfloat)));
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle[3]);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces * 6 * sizeof(GLuint), el, GL_STATIC_DRAW); // Array de índices
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces * 6 * sizeof(GLuint), el, GL_STATIC_DRAW); // Array de índices
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces * 6 * sizeof(GLuint), el, GL_STATIC_DRAW); // index array
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces * 6 * sizeof(GLuint), el, GL_STATIC_DRAW); // index array
 
 
 	delete[] v;
@@ -318,19 +316,19 @@ GLint initTeapot(GLint grid, glm::mat4 transform)
 	delete[] tc;
 
 
-	// Tarea por hacer (ejer. 1.4): Desactivar VAO
+	// Dissable VAO
 	glBindVertexArray(0);
 
 	return 6 * faces;
 }
 
-// END: Inicializa primitivas ////////////////////////////////////////////////////////////////////////////////////
+// END: Initialize primitives ////////////////////////////////////////////////////////////////////////////////////
 
 
-// BEGIN: Funciones de dibujo ////////////////////////////////////////////////////////////////////////////////////
+// BEGIN: Drawing Functions ////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-// Dibuja cubo utilizando VAO (no indexado)
+// Draw cube using VAO (non-indexed)
 ///////////////////////////////////////////////////////////////////////////////
 void drawCube()
 {
@@ -341,10 +339,9 @@ void drawCube()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Dibuja tetera utilizando VAO (indexado)
+// Draw teapot using VAO (indexed)
 ///////////////////////////////////////////////////////////////////////////////
 void drawTeapot() {
-	// Tarea por hacer (ejer. 1.4): Dibujar la tetera
 	glBindVertexArray(vaoTea);
 	//glDrawArrays(GL_TRIANGLES, 0, numVertTeapot);
 	glDrawElements(GL_TRIANGLES, numVertTeapot, GL_UNSIGNED_INT, 0);
@@ -352,7 +349,7 @@ void drawTeapot() {
 	return;
 }
 
-// END: Funciones de dibujo ////////////////////////////////////////////////////////////////////////////////////
+// END: Drawing Functions ////////////////////////////////////////////////////////////////////////////////////
 
 
 int main(int argc, char *argv[])
@@ -395,48 +392,47 @@ GLboolean init()
 
 	glShadeModel(GL_SMOOTH);
 
-	// Tarea por hacer (ejer. 1.1): Descomentar el siguiente código
-	//  Creamos el objeto shader compilado para el shader de vertice.
+	// We create the compiled shader object for the vertex shader.
 	GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	loadSource(vertexShaderID, "../Shaders/main.vert");
 	std::cout << "Compilando shader de vertice ..." << std::endl;
 	glCompileShader(vertexShaderID);
 	printCompileInfoLog(vertexShaderID);
 	
-	// Tarea por hacer (ejer. 1.1): Creamos el objeto shader compilado para el shader de fragmento.
+	// We create the compiled shader object for the fragment shader.
 	GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 	loadSource(fragmentShaderID, "../Shaders/main.frag");
 	std::cout << "Compilando shader de fragmento ..." << std::endl;
 	glCompileShader(fragmentShaderID);
 	printCompileInfoLog(fragmentShaderID);	
 
-	// Tarea por hacer (ejer. 1.1): Creamos el objeto programa.
+	// We create the program object.
 	programID = glCreateProgram();
 
-	// Tarea por hacer (ejer. 1.1): Adjuntamos los shaders compilados al objeto programa
+	// We attach the compiled shaders to the program object
 	glAttachShader(programID, vertexShaderID);
 	glAttachShader(programID, fragmentShaderID);
 
-	// Tarea por hacer (ejer. 1.1): Linkamos el objeto programa
+	// We link the program object
 	glLinkProgram(programID);
 
-	// Tarea por hacer (ejer. 1.1): Descomentar el siguiente código (verifica que no hay errores en el linkado)
+	// Verify that there are no errors in the link
 	std::cout << "Linkando objeto programa ..." << std::endl;
 	printLinkInfoLog(programID);
 	validateProgram(programID);
 
-	// Tarea por hacer (ejer. 1.3): Localizar las variables uniform definidas en los shaders.
+	// Locate the uniform variables defined in the shaders
 	locMat1 = glGetUniformLocation(programID, "uModelViewProj");
 	initCube();
 
-	// tetera
+	// teapot
 	GLuint vertexShaderID2 = glCreateShader(GL_VERTEX_SHADER);
 	loadSource(vertexShaderID2, "../Shaders/tetera.vert");
 	std::cout << "Compilando shader de vertice de tetera ..." << std::endl;
 	glCompileShader(vertexShaderID2);
 	printCompileInfoLog(vertexShaderID2);
 
-	// tetera
+	// teapot
 	GLuint fragmentShaderID2 = glCreateShader(GL_FRAGMENT_SHADER);
 	loadSource(fragmentShaderID2, "../Shaders/tetera.frag");
 	std::cout << "Compilando shader de fragmento tetera ..." << std::endl;
@@ -456,9 +452,6 @@ GLboolean init()
 	locFlo1 = glGetUniformLocation(programID2, "uInter");
 	locFlo2 = glGetUniformLocation(programID2, "uUmbral");
 
-
-
-	// Tarea por hacer (ejer. 1.4): Descomentar el siguiente código
 	numVertTeapot = initTeapot(10, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -1.5f)));
 
 	return true;
@@ -485,8 +478,6 @@ void display()
 	glRotatef(yrot, 0.0f, 1.0f, 0.0f);
 	*/
 
-	// Tarea por hacer (ejer. 1.3): Sustituir el anterior código por el código siguiente.
-
 	glm::mat4 Projection = glm::perspective(45.0f, 1.0f * g_Width / g_Height, 1.0f, 100.0f);
 	glm::mat4 View = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 Model = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f));
@@ -496,8 +487,8 @@ void display()
 
 	glm::mat4 rotColor = glm::rotate(glm::mat4(1.0f), cantRotCol, glm::vec3(1.0f, 0.0f, 0.0f));
 
-	// Tarea por hacer (ejer. 1.1): Activar el objeto programa
-	// Tarea por hacer (ejer. 1.3): Pasarle a los shaders las variables uniform.	
+	// Activate the program object
+	// Pass the uniform variables to the shaders.	
 
 	if (!drawing) {
 		glUseProgram(programID);
@@ -505,8 +496,8 @@ void display()
 		drawCube();
 	}
 
-	// Tarea por hacer (ejer. 1.4): Activar el objeto programa
-	// Tarea por hacer (ejer. 1.4): Pasarle a los shaders las variables uniform.
+	// Activate the program object
+	// Pass the uniform variables to the shaders.
 	if (drawing) {
 		glUseProgram(programID2);
 		glUniformMatrix4fv(locMat2, 1, GL_FALSE, &mvp[0][0]);
@@ -517,7 +508,7 @@ void display()
 		drawTeapot();
 	}
 
-	// Tarea por hacer (ejer. 1.1): Desactivar el objeto programa	
+	// Dissable the program object
 	glUseProgram(0);
 
 	glutSwapBuffers();

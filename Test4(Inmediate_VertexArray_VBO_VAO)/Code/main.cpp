@@ -806,7 +806,40 @@ void keyboard(unsigned char key, int x, int y)
 			opcion = key - '0';
 			std::cout << key << std::endl;
 			break;
-			
+	}
+
+	switch (opcion)
+	{
+	case 0:
+		std::cout << "inmediate mode" << std::endl;
+		break;
+	case 1:
+		std::cout << "3 vertex array" << std::endl;
+		break;
+	case 2:
+		std::cout << "3 vertex array with index array" << std::endl;
+		break;
+	case 3:
+		std::cout << "1 vertex array with index array" << std::endl;
+		break;
+	case 4:
+		std::cout << "3 VBO" << std::endl;
+		break;
+	case 5:
+		std::cout << "3 VBO with index array" << std::endl;
+		break;
+	case 6:
+		std::cout << "1 VBO with index array" << std::endl;
+		break;
+	case 7:
+		std::cout << "3 VAO" << std::endl;
+		break;
+	case 8:
+		std::cout << "3 VAO with index array" << std::endl;
+		break;
+	case 9:
+		std::cout << "1 VAO with index array" << std::endl;
+		break;
 	}
 
 	
