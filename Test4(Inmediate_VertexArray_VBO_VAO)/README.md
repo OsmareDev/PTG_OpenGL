@@ -22,7 +22,7 @@ The code generates a large number of cubes and checks the performance difference
 
 ## Español
 
-En el código se genera un número alto de cubos y se comprueba la diferencia de rendimiento entre:
+En el código se genera un gran número de cubos y se comprueba la diferencia de rendimiento entre:
 
 ### Modo inmediato (**Los comandos de renderizado se envían inmediatamente al hardware de la tarjeta gráfica. Siendo más simple de usar pero perdiendo rendimiento.**)
 
