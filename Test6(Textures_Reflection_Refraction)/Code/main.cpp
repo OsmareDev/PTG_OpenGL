@@ -1,5 +1,3 @@
-// Ejercicios tema 3 - parte 1 (PTG)
-
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include <iostream>
@@ -51,8 +49,8 @@ GLfloat yrot = 0.0f;
 GLfloat xdiff = 0.0f;
 GLfloat ydiff = 0.0f;
 
-GLint g_Width = 500;                          // Ancho inicial de la ventana
-GLint g_Height = 500;                         // Altura incial de la ventana
+GLint g_Width = 500;
+GLint g_Height = 500;
 
 GLuint cubeVAOHandle;
 GLuint sphereVAOHandle;
@@ -78,11 +76,11 @@ GLuint textIds[3];
 //  |/      |/
 //  v2------v3
 
-// Coordenadas del vertex array  =====================================
-// Un cubo tiene 6 lados y cada lado tiene 2 triangles, por tanto, un cubo
-// tiene 36 vértices (6 lados * 2 trian * 3 vertices = 36 vertices). Y cada
-// vertice tiene 4 components (x,y,z) de reales, por tanto, el tamaño del vertex
-// array es 144 floats (36 * 4 = 144).
+// Vertex array coordinates ==================================================
+// A cube has 6 sides and each side has 2 triangles, therefore, a cube
+// has 36 vertices (6 sides * 2 trian * 3 vertices = 36 vertices). And every
+// vertex has 4 real components (x,y,z), therefore, the size of the vertex
+// array is 144 floats (36 * 4 = 144).
 GLfloat vertices1[] = { 1, 1, 1,  -1, 1, 1,  -1,-1, 1,      // v0-v1-v2 (front)
 					   -1,-1, 1,   1,-1, 1,   1, 1, 1,      // v2-v3-v0
 
@@ -137,7 +135,7 @@ GLfloat texCoord1[] = { 1, 1,	0, 1,	0, 0,		// v0-v1-v2 (front)
 						0, 0,	1, 0,	1, 1,		// v4-v7-v6 (back)
 						1, 1,	0, 1,   0, 0 };		// v6-v5-v4
 
-// BEGIN: Carga shaders ////////////////////////////////////////////////////////////////////////////////////////////
+// BEGIN: Load shaders ////////////////////////////////////////////////////////////////////////////////////////////
 
 void loadSource(GLuint &shaderID, std::string name) 
 {
@@ -233,11 +231,11 @@ GLint status;
 	return;
 }
 
-// END:   Carga shaders ////////////////////////////////////////////////////////////////////////////////////////////
+// END:   Load shaders ////////////////////////////////////////////////////////////////////////////////////////////
 
-// BEGIN: Inicializa primitivas ////////////////////////////////////////////////////////////////////////////////////
+// BEGIN: Initialize primitives ////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-// Init para drawCube_VAO
+// Init for drawCube_VAO
 ///////////////////////////////////////////////////////////////////////////////
 void initCube( GLint i = 0) 
 {
@@ -253,8 +251,8 @@ GLuint vboHandle;
 	glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices1), sizeof(normales1), normales1);
 	glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices1) + sizeof(normales1), sizeof(texCoord1), texCoord1);
 
-	// Tarea a realizar (ejercicio 1.1): Localizar las variables in del vertex shader para la posición,
-	// la normal y las coordenadas de textura, habilitar estos atributos y establecer los punteros
+	// Locate the in variables of the vertex shader for the position
+	// the normal and texture coordinates, enable these attributes and set the pointers
 	GLuint locCub1 = glGetAttribLocation(programIDs[i], "aPosition");
 	GLuint locCub2 = glGetAttribLocation(programIDs[i], "aNormal");
 	GLuint locCub3 = glGetAttribLocation(programIDs[i], "aTexCoord");
@@ -273,11 +271,11 @@ GLuint vboHandle;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Init Teapot
-// parametros: 
-//		grid - número de rejillas
-//		transform - matriz de tranformación del modelo
+// parameters:
+// 		grid - number of grids
+// 		transform - model transformation matrix
 // return:
-//		número de vertices
+// 		number of vertices
 ///////////////////////////////////////////////////////////////////////////////
 GLint initTeapot(GLint grid, glm::mat4 transform, GLint i = 0)
 {
@@ -298,28 +296,28 @@ GLint initTeapot(GLint grid, glm::mat4 transform, GLint i = 0)
 	glGenBuffers(4, handle);
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[0]);
-	glBufferData(GL_ARRAY_BUFFER, (3 * verts) * sizeof(float), v, GL_STATIC_DRAW); // Datos de la posición de los vértices
+	glBufferData(GL_ARRAY_BUFFER, (3 * verts) * sizeof(float), v, GL_STATIC_DRAW);
 	
 	GLuint loc1 = glGetAttribLocation(programIDs[i], "aPosition");
 	glVertexAttribPointer(loc1, 3, GL_FLOAT, GL_FALSE, 0, ((GLubyte*)NULL + (0)));
 	glEnableVertexAttribArray(loc1);  // Vertex position
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[1]);
-	glBufferData(GL_ARRAY_BUFFER, (3 * verts) * sizeof(float), n, GL_STATIC_DRAW); // Datos de las normales de los vértices
+	glBufferData(GL_ARRAY_BUFFER, (3 * verts) * sizeof(float), n, GL_STATIC_DRAW);
 	
 	GLuint loc2 = glGetAttribLocation(programIDs[i], "aNormal");
 	glVertexAttribPointer(loc2, 3, GL_FLOAT, GL_FALSE, 0, ((GLubyte*)NULL + (0)));
 	glEnableVertexAttribArray(loc2);  // Vertex normal
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[2]);
-	glBufferData(GL_ARRAY_BUFFER, (2 * verts) * sizeof(float), tc, GL_STATIC_DRAW); // Datos de las coordenadas de textura
+	glBufferData(GL_ARRAY_BUFFER, (2 * verts) * sizeof(float), tc, GL_STATIC_DRAW);
 	
 	GLuint loc3 = glGetAttribLocation(programIDs[i], "aTexCoord");
 	glVertexAttribPointer(loc3, 2, GL_FLOAT, GL_FALSE, 0, ((GLubyte*)NULL + (0)));
 	glEnableVertexAttribArray(loc3);  // texture coords
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle[3]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * faces * sizeof(unsigned int), el, GL_STATIC_DRAW); // Array de índices
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * faces * sizeof(unsigned int), el, GL_STATIC_DRAW);
 
 	delete [] v;
 	delete [] n;
@@ -333,12 +331,12 @@ GLint initTeapot(GLint grid, glm::mat4 transform, GLint i = 0)
 
 ///////////////////////////////////////////////////////////////////////////////
 // Init Sphere
-// parametros: 
-//		radius - radio de la esfera
-//      rings - número de anillos paralelos
-//		sectors - numero de divisiones de los anillos
+// parameters:
+// 		radius - radius of the sphere
+// 		rings - number of parallel rings
+// 		sectors - number of ring divisions
 // return:
-//		número de vertices
+// 		number of vertices
 ///////////////////////////////////////////////////////////////////////////////
 GLint initSphere(GLfloat radius, GLuint rings, GLuint sectors, GLint shader = 0)
 {
@@ -385,29 +383,29 @@ GLint initSphere(GLfloat radius, GLuint rings, GLuint sectors, GLint shader = 0)
 	glGenBuffers(4, handle);
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[0]);
-	glBufferData(GL_ARRAY_BUFFER, (rings * sectors * 3) * sizeof(GLfloat), sphere_vertices, GL_STATIC_DRAW); // Datos de la posición de los vértices
-	// Tarea a realizar (ejercicio 1.1): Localizar la variable in del vertex shader para la posición,
-	// habilitar los array de vértices para el atributo y establecer el puntero
+	glBufferData(GL_ARRAY_BUFFER, (rings * sectors * 3) * sizeof(GLfloat), sphere_vertices, GL_STATIC_DRAW);
+	// Locate the variable in of the vertex shader for the position,
+	// enable vertex arrays for the attribute and set the pointer
 	GLuint locSph1 = glGetAttribLocation(programIDs[shader], "aPosition");
 	glEnableVertexAttribArray(locSph1);
 	glVertexAttribPointer(locSph1, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[1]);
-	glBufferData(GL_ARRAY_BUFFER, (rings * sectors * 3) * sizeof(GLfloat), sphere_normals, GL_STATIC_DRAW); // Datos de las normales de los vértices
-	// Tarea a realizar (ejercicio 1.1): idem para la normal.
+	glBufferData(GL_ARRAY_BUFFER, (rings * sectors * 3) * sizeof(GLfloat), sphere_normals, GL_STATIC_DRAW);
+	// ditto for the normal one.
 	GLuint locSph2 = glGetAttribLocation(programIDs[shader], "aNormal");
 	glEnableVertexAttribArray(locSph2);
 	glVertexAttribPointer(locSph2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[2]);
-	glBufferData(GL_ARRAY_BUFFER, (rings * sectors * 2) * sizeof(float), sphere_texcoords, GL_STATIC_DRAW); // Datos de las coordenadas de textura
-	// Tarea a realizar (ejercicio 1.1): idem para la las coordenadas de textura.
+	glBufferData(GL_ARRAY_BUFFER, (rings * sectors * 2) * sizeof(float), sphere_texcoords, GL_STATIC_DRAW);
+	// ditto for the texture coordinates.
 	GLuint locSph3 = glGetAttribLocation(programIDs[shader], "aTexCoord");
 	glEnableVertexAttribArray(locSph3);
 	glVertexAttribPointer(locSph3, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle[3]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, rings * sectors * 4 * sizeof(GLushort), sphere_indices, GL_STATIC_DRAW); // Array de índices
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, rings * sectors * 4 * sizeof(GLushort), sphere_indices, GL_STATIC_DRAW);
 
 	delete [] sphere_vertices;
 	delete [] sphere_normals;
@@ -419,9 +417,9 @@ GLint initSphere(GLfloat radius, GLuint rings, GLuint sectors, GLint shader = 0)
 	return rings * sectors * 4;
 }
 
-// END: Inicializa primitivas ////////////////////////////////////////////////////////////////////////////////////
+// END: Initialize primitives ////////////////////////////////////////////////////////////////////////////////////
 
-// BEGIN: Funciones de dibujo ////////////////////////////////////////////////////////////////////////////////////
+// BEGIN: Drawing Features ////////////////////////////////////////////////////////////////////////////////////
 
 void drawCube()
 {
@@ -445,7 +443,7 @@ void drawSphere()  {
 	return;
 }
 
-// END: Funciones de dibujo ////////////////////////////////////////////////////////////////////////////////////
+// END: Drawing Features ////////////////////////////////////////////////////////////////////////////////////
 
 int main(int argc, char *argv[])
 {
@@ -453,7 +451,7 @@ int main(int argc, char *argv[])
 	glutInitWindowPosition(50, 50);
 	glutInitWindowSize(g_Width, g_Height);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutCreateWindow("Programa Ejemplo");
+	glutCreateWindow("Test 6");
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
 	{
@@ -488,7 +486,7 @@ GLboolean init()
 	const GLchar* ShaderVerts[5] = {"../Shaders/mix.vert", "../Shaders/reflejo.vert", "../Shaders/trans.vert", "../Shaders/transCube.vert", "../Shaders/transSphere.vert" };
 	const GLchar* ShaderFrags[5] = {"../Shaders/mix.frag", "../Shaders/reflejo.frag", "../Shaders/trans.frag", "../Shaders/transCube.frag", "../Shaders/transSphere.frag" };
 
-	// programa 1 :::: mezclado de texturas
+	// program 1 :::: texture mixing
 	for (GLuint i = 0; i < 5; ++i) {
 		programIDs[i] = glCreateProgram();
 
@@ -551,8 +549,8 @@ GLboolean init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	
-	// Textura musgo
-	// Tarea a realizar (ejercicio 1.1): Fijar la unidad de textura, activar el objeto textura, cargar en él los datos de la imagen y definir los parámetros de la textura
+	// Moss texture
+	// Set the texture unit, activate the texture object, load the image data into it, and define the texture parameters
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, textIds[1]);
 
@@ -567,8 +565,8 @@ GLboolean init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-	// Mapa de entorno
-	// Tarea a realizar (ejercicio 1.2): hacer lo mismo para el mapa de entorno.
+	// Environment map
+	// ditto for the environment map
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textIds[2]);
 
@@ -601,7 +599,7 @@ GLboolean init()
 
 	for (GLint i = 0; i < 5; ++i) {
 		locUniformCamera[i] = glGetUniformLocation(programIDs[i], "uCameraPos");
-		// Tarea a realizar: localizar el resto de varaibles uniform definidas en los shaders.
+		// locate the rest of the uniform variables defined in the shaders.
 		locUniformStone[i] = glGetUniformLocation(programIDs[i], "uStoneTex");
 		locUniformMoss[i] = glGetUniformLocation(programIDs[i], "uMossTex");
 		locUniformMap[i] = glGetUniformLocation(programIDs[i], "uTexMap");
@@ -665,17 +663,16 @@ void display()
 	glUseProgram(programIDs[shaderAUsar+offsetExtra]);
 
 	glUniform3fv(locUniformCamera[shaderAUsar + offsetExtra], 1, &cameraPos[0]);
-	// Tareas a realizar: establecer los valores para las variables uniform de tipo sampler
+	// set values for sampler-type uniform variables
 	glUniform1i(locUniformStone[shaderAUsar + offsetExtra], 0);
 	glUniform1i(locUniformMoss[shaderAUsar + offsetExtra], 1);
 	glUniform1i(locUniformMap[shaderAUsar + offsetExtra], 2);
 
 
-// Tarea a realizar (ejercicio 1.2b): descomentar el código
-	// Dibuja el entorno
+	// Draw the environment
 	mvp = Projection * View * ModelSky;
 	nm = glm::mat3(glm::transpose(glm::inverse(ModelSky)));
-	// Tarea a realizar (ejercicio 1.2b): pasarle a las variables uniform las matrices
+	// pass matrix to the uniform variables
 	glUniformMatrix4fv(locUniformMM[shaderAUsar+ offsetExtra], 1, GL_FALSE, &ModelSky[0][0]);
 	glUniformMatrix4fv(locUniformMVPM[shaderAUsar+ offsetExtra], 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix3fv(locUniformNM[shaderAUsar+ offsetExtra], 1, GL_FALSE, &nm[0][0]);
@@ -716,10 +713,10 @@ void display()
 		}
 	}
 
-	// Dibuja Cubo
+	// Draw Cube
 	mvp = Projection * View * ModelCube;
 	nm = glm::mat3(glm::transpose(glm::inverse(ModelCube)));
-	// Tarea a realizar (ejercicio 1): pasarle a las variables uniform las matrices
+	// pass matrix to the uniform variables
 	glUniformMatrix4fv(locUniformMM[shaderAUsar + offsetExtra], 1, GL_FALSE, &ModelCube[0][0]);
 	glUniformMatrix4fv(locUniformMVPM[shaderAUsar + offsetExtra], 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix3fv(locUniformNM[shaderAUsar + offsetExtra], 1, GL_FALSE, &nm[0][0]);
@@ -729,7 +726,7 @@ void display()
 
 	/*
 	-----------------------------------------
-	SI: se esta usando los offset extra o sea que hay 1 shader distinto para cada uno se cambia de programa y se pasan de nuevo las variables
+	IF: the extra offset is being used, that is, there is 1 different shader for each one, the program is changed and the variables are passed again
 	*/
 
 	if (offsetExtra) {
@@ -759,17 +756,17 @@ void display()
 
 		glm::mat4 ToModelCube = glm::inverse(ModelSphere);
 
-		// se calcula el angulo critico
+		// the critical angle is calculated
 		GLfloat ang = asin(1/1.521);
 		glUniform1f(locUniformTam[1], ang);
 		glUniformMatrix4fv(locUniformToModel[1], 1, GL_FALSE, &ToModelCube[0][0]);
 	}
 
 
-	// Dibuja Esfera
+	// Draw Sphere
 	mvp = Projection * View * ModelSphere;
 	nm = glm::mat3(glm::transpose(glm::inverse(ModelSphere)));
-	// Tarea a realizar (ejercicio 1): pasarle a las variables uniform las matrices
+	// pass arrays to the uniform variables
 	glUniformMatrix4fv(locUniformMM[shaderAUsar + offsetExtra * 2], 1, GL_FALSE, &ModelSphere[0][0]);
 	glUniformMatrix4fv(locUniformMVPM[shaderAUsar + offsetExtra * 2], 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix3fv(locUniformNM[shaderAUsar + offsetExtra * 2], 1, GL_FALSE, &nm[0][0]);
@@ -778,7 +775,7 @@ void display()
 
 	/*
 	-----------------------------------------
-	SI: se esta usando los offset extra o sea que hay 1 shader distinto para cada uno se cambia de programa y se pasan de nuevo las variables
+	IF: the extra offset is being used, that is, there is 1 different shader for each one, the program is changed and the variables are passed again
 	*/
 
 	if (offsetExtra) {
@@ -806,10 +803,10 @@ void display()
 		glUniform1i(locUniformDrawSky[shaderAUsar], 0);
 	}
 
-	// Dibuja Tetera
+	// Draw Teapot
 	mvp = Projection * View * ModelTeapot;
 	nm = glm::mat3(glm::transpose(glm::inverse(ModelTeapot)));
-	// Tarea a realizar (ejercicio 1): pasarle a las variables uniform las matrices
+	// pass matrix to the uniform variables
 	glUniformMatrix4fv(locUniformMM[shaderAUsar], 1, GL_FALSE, &ModelTeapot[0][0]);
 	glUniformMatrix4fv(locUniformMVPM[shaderAUsar], 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix3fv(locUniformNM[shaderAUsar], 1, GL_FALSE, &nm[0][0]);
@@ -853,12 +850,11 @@ void keyboard(GLubyte key, GLint x, GLint y)
 		animation = !animation;
 		break;
 	case 'r': case 'R':
-		// Tarea a realizar (ejercicio 1.2): activar la tecla 'R'
 		shaderAUsar = (shaderAUsar + 1) % 3;
 
 		/*
-		OFFSETEXTRA controla que se usen los shaders especificos de la esfera y el cubo
-		En caso de que sea 0 siempre cuando se haga la refraccion se usara la generica para los 3 objetos
+		OFFSETEXTRA controls whether the specific sphere and cube shaders are used.
+		If it is 0, always when the refraction is done, the generic one will be used for the 3 objects
 		*/
 		offsetExtra = shaderAUsar / 2;
 
