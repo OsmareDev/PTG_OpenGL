@@ -1,4 +1,5 @@
-
+![Test13_2](https://github.com/OsmareDev/PTG_OpenGL/assets/50903643/96251c42-3a49-409d-91fd-b2ede55e851b)
+![Test13_1](https://github.com/OsmareDev/PTG_OpenGL/assets/50903643/6fdfdacc-3593-4195-b194-5f272934d669)
 
 ## English
 
