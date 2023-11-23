@@ -1,6 +1,3 @@
-// Ejercicios tema 3 - parte 2 (PTG)
-// oscar marin egea
-
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include <iostream>

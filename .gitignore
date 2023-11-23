@@ -37,6 +37,8 @@
 *.zip
 *.7z
 Textures/
+texturas/
+texturas2/
 .vs/
 Debug/
 x64/
