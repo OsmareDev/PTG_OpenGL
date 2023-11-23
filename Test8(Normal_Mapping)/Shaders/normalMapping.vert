@@ -1,9 +1,9 @@
 #version 150
 
-in vec3 aPosition; // Posición del vértice en el S.R. local al objeto
+in vec3 aPosition; // Vertex position in the R.S. local to object
 in vec2 aTexCoord;
 
-in vec3 aNormal; // Normal del vértice en el S.R. local al objeto
+in vec3 aNormal; // Normal of the vertex in the R.S. local to object
 in vec3 aTangent;
 in vec3 aBitangent;
 
@@ -14,12 +14,12 @@ uniform mat4 uModelViewMatrix;
 uniform mat3 uNormalMatrix;
 
 struct LightInfo {
-	vec4 lightPos; // Posición de la luz (S.R. de la vista)
+	vec4 lightPos; // Light Position (R.S. of Sight)
 	vec3 intensity;
 	vec3 k;
-	vec3 dir; // Dirección del foco (S.R. de la vista)
-	float cutOffInt; // Ángulo interior (límite zona iluminada)
-	float cutOffExt; // Ángulo exterior (límite zona penumbra)
+	vec3 dir; // Focus direction (R.S. of view)
+	float cutOffInt; // Interior angle (illuminated zone limit)
+	float cutOffExt; // Exterior angle (penumbra zone limit)
 };
 uniform LightInfo uLight;
 
@@ -37,7 +37,7 @@ out vec2 vTexCoord;
 
 void main()
 {
-	// no es necesario usar la normal definida en el texture map?
+	// Isn't it necessary to use the normal defined in the texture map?
 	vec3 n = normalize(uNormalMatrix * aNormal);
 	vec3 t = normalize(uNormalMatrix * aTangent);
 	vec3 b = cross(n, t);
@@ -45,10 +45,10 @@ void main()
 
 	vec3 eyeVertex = vec3(uModelViewMatrix * vec4(aPosition,1));
 
-	// vector luz
+	// vector light
 	vLdir = normalize( TBN * (vec3(uLight.lightPos) - eyeVertex) );
 
-	// vector vista
+	// vector view
 	vVdir = normalize( TBN * vec3(-eyeVertex) );
 
 	vTexCoord = aTexCoord;

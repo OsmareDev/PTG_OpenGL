@@ -1,12 +1,12 @@
 #version 150
 
 struct LightInfo {
-	vec4 lightPos; // Posición de la luz (S.R. de la vista)
+	vec4 lightPos; // Light Position (R.S. of Sight)
 	vec3 intensity;
 	vec3 k;
-	vec3 dir; // Dirección del foco (S.R. de la vista)
-	float cutOffInt; // Ángulo interior (límite zona iluminada)
-	float cutOffExt; // Ángulo exterior (límite zona penumbra)
+	vec3 dir; // Focus direction (R.S. of view)
+	float cutOffInt; // Interior angle (illuminated area limit)
+	float cutOffExt; // Exterior angle (penumbra zone limit)
 };
 uniform LightInfo uLight;
 
@@ -42,9 +42,9 @@ vec2 tex = vTexCoord;
 const float scale = 0.05;
 const float bias = -0.025;
 
-// ADS para la luz puntual
-// Parámetros:	pos - posición del vértice en el S.R. de la vista
-//				n - normal del vértice en el S.R. de la vista
+// ADS for spot light
+// Parameters: pos - position of the vertex in the S.R. of sight
+// n - normal of the vertex in the S.R. of sight
 vec3 ads()
 {
 	vec3 ldir = normalize( vLdir );
