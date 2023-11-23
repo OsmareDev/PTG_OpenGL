@@ -1,0 +1,43 @@
+﻿  tema3_parte2.cpp
+  GLM: rotate function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: rotate_slow function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: perspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: perspectiveFov function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: infinitePerspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: tweakedInfinitePerspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+C:\dev\ptg\caso 7\codigo\tema3_parte2.cpp(569,49): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  vboteapot.cpp
+  GLM: rotate function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: rotate_slow function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: perspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: perspectiveFov function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: infinitePerspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: tweakedInfinitePerspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  vbotorus.cpp
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewEnableVertexAttribArray sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewBindVertexArray sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewUseProgram sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewVertexAttribPointer sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewGetShaderiv sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewCompileShader sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewGetAttribLocation sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewCreateShader sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewBindBuffer sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewCreateProgram sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewGetShaderInfoLog sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewValidateProgram sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewGetProgramiv sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp__glewGetErrorString@4 sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewUniform1f sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewGetUniformLocation sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewBufferData sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewAttachShader sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewShaderSource sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewGenVertexArrays sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewGetProgramInfoLog sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewGenBuffers sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewUniform4fv sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewLinkProgram sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp__glewInit@0 sin resolver
+tema3_parte2.obj : error LNK2001: símbolo externo __imp____glewUniform3fv sin resolver
+C:\dev\ptg\caso 7\caso7\Release\caso7.exe : fatal error LNK1120: 26 externos sin resolver
